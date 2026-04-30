@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Form</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%);
+            min-height: 100vh;
+            color: #334155;
+            margin: 0;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            font-weight: 700;
+            font-size: 32px;
+            margin-top: 0;
+            margin-bottom: 30px;
+            color: #0f172a;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            padding: 40px 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08), 0 1px 8px rgba(0,0,0,0.04);
+            max-width: 1000px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            animation: fadeIn 0.6s ease-out forwards;
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #475569;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            padding: 14px 18px;
+            margin-bottom: 24px;
+            border: 2px solid transparent;
+            border-radius: 12px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+            width: 100%;
+            box-sizing: border-box;
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus {
+            background-color: #ffffff;
+            border-color: #a855f7;
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.15);
+            outline: none;
+            transform: translateY(-2px);
+        }
+
+        button, .btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(118, 75, 162, 0.3);
+            font-family: 'Inter', sans-serif;
+        }
+
+        button:hover, .btn:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.4);
+        }
+
+        button:active, .btn:active {
+            transform: translateY(1px);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 18px 20px;
+            text-align: left;
+        }
+
+        th {
+            font-weight: 600;
+            color: #64748b;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding-bottom: 5px;
+            padding-top: 5px;
+        }
+
+        tr td:first-child {
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+        tr td:last-child {
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+
+        tbody tr {
+            background-color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        tbody tr:hover {
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+        }
+
+        td .btn {
+            padding: 8px 18px;
+            font-size: 13px;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%);
+            box-shadow: 0 3px 10px rgba(59, 130, 246, 0.3);
+        }
+
+        td .btn.btn-delete {
+            background: linear-gradient(135deg, #f43f5e 0%, #fb923c 100%);
+            box-shadow: 0 3px 10px rgba(244, 63, 94, 0.3);
+        }
+
+        td .btn:hover {
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.4);
+        }
+        td .btn.btn-delete:hover {
+            box-shadow: 0 6px 15px rgba(244, 63, 94, 0.4);
+        }
+
+        .action-links {
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 25px 20px;
+            }
+            th, td {
+                padding: 12px;
+            }
+            .action-links {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Teacher Form</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <label>Employee ID</label>
+            <input type="text" name="empid" required value="{{obj.empid}}">
+
+            <label>Name</label>
+            <input type="text" name="name" required value="{{obj.name}}">
+
+            <label>Email</label>
+            <input type="email" name="email" required value="{{obj.email}}">
+
+            <label>Subject</label>
+            <input type="text" name="subject" required value="{{obj.subject}}">
+
+            <button type="submit">Submit Details</button>
+        </form>
+    </div>
+</body>
+</html>
