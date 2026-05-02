@@ -201,6 +201,11 @@
     </style>
 </head>
 <body>
+    {% if messages%}
+    {% for i in messages%}
+    <p style='color:green'>{{i}}</p>
+    {% endfor %}
+    {% endif %}
     <div class="container">
         <h2>Teacher Data</h2>
         <div class="action-links">

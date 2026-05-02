@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from .models import student
 from .models import teacher
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -14,6 +15,7 @@ def studentform(request):
         email=request.POST.get('email')
         branch=request.POST.get('branch')
         student.objects.create(rollnum=rollnum,name=name,age=age,email=email,branch=branch)
+        messages.success(request, "Student details submitted successfully!")
         return redirect('studentdata')
     return render(request,'studentform.html')
 
