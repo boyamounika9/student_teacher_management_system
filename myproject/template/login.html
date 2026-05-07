@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(to right, #4facfe, #00f2fe);
+        }
+
+        .login-box{
+            width:350px;
+            background:white;
+            padding:40px;
+            border-radius:15px;
+            box-shadow:0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .login-box h2{
+            text-align:center;
+            margin-bottom:30px;
+            color:#333;
+        }
+
+        .input-box{
+            margin-bottom:20px;
+        }
+
+        .input-box label{
+            display:block;
+            margin-bottom:8px;
+            color:#555;
+            font-weight:bold;
+        }
+
+        .input-box input{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            outline:none;
+            transition:0.3s;
+        }
+
+        .input-box input:focus{
+            border-color:#4facfe;
+            box-shadow:0 0 5px #4facfe;
+        }
+
+        .login-btn{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:8px;
+            background:#4facfe;
+            color:white;
+            font-size:16px;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        .login-btn:hover{
+            background:#00c6fb;
+        }
+
+        .register-link{
+            text-align:center;
+            margin-top:20px;
+        }
+
+        .register-link a{
+            text-decoration:none;
+            color:#4facfe;
+            font-weight:bold;
+        }
+
+        .register-link a:hover{
+            text-decoration:underline;
+        }
+    </style>
+</head>
+<body>
+<div class="Login-box">
+
+    {% if messages %}
+        {% for i in messages %}
+            <div style="
+                padding:12px;
+                margin-bottom:15px;
+                border-radius:8px;
+                text-align:center;
+                font-size:15px;
+                font-weight:bold;
+                color:white;
+                background-color:
+                {% if i.tags == 'success' %}green
+                {% elif i.tags == 'error' %}red
+                {% elif i.tags == 'warning' %}orange
+                {% else %}gray
+                {% endif %};
+            ">
+                {{ i }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    <div class="login-box">
+        <h2>Login</h2>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="input-box">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Enter Username" required>
+            </div>
+
+            <div class="input-box">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Enter Password" required>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+
+            <div class="register-link">
+                Don't have an account?
+                <a href="{% url 'register'%}">Register</a>
+            </div>
+        </form>
+    </div>
+
+</body>
+</html>

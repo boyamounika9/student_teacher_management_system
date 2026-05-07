@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register Form</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+    }
+
+    .register-container {
+      width: 350px;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .input-box {
+      margin-bottom: 15px;
+    }
+
+    .input-box label {
+      display: block;
+      margin-bottom: 5px;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .input-box input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    .input-box input:focus {
+      border-color: #4facfe;
+      box-shadow: 0 0 5px rgba(79, 172, 254, 0.5);
+    }
+
+    .register-btn {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background: #4facfe;
+      color: white;
+      font-size: 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .register-btn:hover {
+      background: #2196f3;
+    }
+
+    .login-link {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    .login-link a {
+      color: #2196f3;
+      text-decoration: none;
+    }
+
+  </style>
+</head>
+
+<body>
+<div class="register-box">
+
+    {% if messages %}
+        {% for message in messages %}
+            <div style="
+                padding:12px;
+                margin-bottom:15px;
+                border-radius:8px;
+                text-align:center;
+                font-size:15px;
+                font-weight:bold;
+                color:white;
+                background-color:
+                {% if message.tags == 'success' %}green
+                {% elif message.tags == 'error' %}red
+                {% elif message.tags == 'warning' %}orange
+                {% else %}gray
+                {% endif %};
+            ">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+  <div class="register-container">
+    <h2>Register Form</h2>
+
+
+    <form method='POST'>
+        {% csrf_token %}
+      <div class="input-box">
+        <label>Username</label>
+        <input type="text" placeholder="Enter username" name='username'  />
+      </div>
+
+      <div class="input-box">
+        <label>Email</label>
+        <input type="email" placeholder="Enter email" name='email' />
+      </div>
+
+      <div class="input-box">
+        <label>Password</label>
+        <input type="password" placeholder="Enter password" name='password' />
+      </div>
+
+      <div class="input-box">
+        <label>Confirm Password</label>
+        <input type="password" placeholder="Confirm password" name='cpassword' />
+      </div>
+
+      <button type="submit" class="register-btn">Register</button>
+
+     
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>

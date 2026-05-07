@@ -2,6 +2,9 @@ from django.shortcuts import render,redirect
 from .models import student
 from .models import teacher
 from django.contrib import messages
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate,login,logout
+from django.db import IntegrityError
 
 # Create your views here.
 def home(request):
@@ -27,7 +30,9 @@ def teacherform(request):
         email=request.POST.get('email')
         subject=request.POST.get('subject')
         teacher.objects.create(empid=empid,name=name,email=email,subject=subject)
-        return redirect('teacherdata')
+        messages.success(request,'teacher details are submitted sucessfully!!')
+        return redirect('teacherform')
+
     return render(request,'teacherform.html')
 
 def studentdata(request):
@@ -73,3 +78,56 @@ def teacherdelete(request,id):
     object=teacher.objects.get(id=id)
     object.delete()
     return redirect('teacherdata') 
+
+#=======register page===============
+
+
+def register(request):
+
+    if request.method == 'POST':
+
+        try:
+            username = request.POST.get('username')
+            email = request.POST.get('email')
+            password = request.POST.get('password')
+            cpassword = request.POST.get('cpassword')
+
+            if password != cpassword:
+                messages.warning(request, 'Password and Confirm Password do not match')
+                return render(request, 'register.html')
+
+            User.objects.create_user(
+                username=username,
+                email=email,
+                password=password
+            )
+            messages.success(request,'registerd sucessfully !!!')
+            return redirect('login')
+
+        except IntegrityError:
+            messages.error(request, 'User already exists')
+            return render(request, 'register.html')
+
+        except Exception as e:
+            messages.error(request, f'Error: {e}')
+            return render(request, 'register.html')
+
+    return render(request, 'register.html')
+
+
+def loginpage(request):
+    if request.method=='POST':
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        user=authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('home')
+        else:
+            messages.error(request,'Incorrect Credentials')
+            return redirect('login')
+    return render(request,'login.html')
+
+def logoutpage(request):
+    logout(request)
+    return redirect('login')
