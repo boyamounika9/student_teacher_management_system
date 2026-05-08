@@ -31,7 +31,7 @@ def teacherform(request):
         subject=request.POST.get('subject')
         teacher.objects.create(empid=empid,name=name,email=email,subject=subject)
         messages.success(request,'teacher details are submitted sucessfully!!')
-        return redirect('teacherform')
+        return redirect('teacherdata')
 
     return render(request,'teacherform.html')
 

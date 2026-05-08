@@ -92,7 +92,7 @@
             transform: translateY(-2px);
         }
 
-        button, .btn {
+         .btn {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: #ffffff;
             border: none;
@@ -201,20 +201,28 @@
     </style>
 </head>
 <body>
+
     <div class="container">
         <h2>Management System</h2>
         <p style="text-align: center; color: #64748b; font-size: 18px; margin-bottom: 35px;">Welcome to the portal. Please choose a module below.</p>
-        <button><a href="{% url 'logout'%}" style="display:inline-block;
-          padding:10px 20px;
-          background:red;
-          color:white;
-          text-decoration:none;
-          border-radius:5px;
-          font-weight:bold;">logout</a></button>
         <div class="action-links">
             <a href="{% url 'studentform'%}" class="btn" style="background: linear-gradient(135deg, #3b82f6 0%, #2dd4bf 100%); box-shadow: 0 4px 15px rgba(59,130,246,0.3);">Manage Students</a>
             <a href="{% url 'teacherform'%}" class="btn" style="background: linear-gradient(135deg, #a855f7 0%, #ec4899 100%); box-shadow: 0 4px 15px rgba(168,85,247,0.3);">Manage Teachers</a>
         </div>
+            <a href="{% url 'logout' %}" 
+            style="
+            position:absolute;
+            top:20px;
+            right:30px;
+            padding:10px 20px;
+            background:red;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            font-weight:bold;
+            ">
+            Logout
+            </a>
     </div>
 </body>
 </html>
